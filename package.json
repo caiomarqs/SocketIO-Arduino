@@ -2,7 +2,7 @@
   "name": "node_serial_arduino",
   "version": "1.0.0",
   "description": "This project is an example of data interaction between arduino and node.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cd server && node app.js"
@@ -12,6 +12,7 @@
   "dependencies": {
     "ejs": "^3.0.1",
     "express": "^4.17.1",
-    "serialport": "^8.0.7"
+    "serialport": "^8.0.7",
+    "socket.io": "^2.3.0"
   }
 }

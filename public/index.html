@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/print-value.js"></script>
+</head>
+
+<body>
+    <h3 id="textValue"></h3>
+    <script type="module">
+        
+        const socket = io()    
+
+        const textValue = document.getElementById('textValue')
+
+        socket.on('connect', () => {
+            const playerId = socket.id
+            console.log(`Player connected on Client with id: ${playerId}`)
+        })
+
+        socket.on('new-value', (newValue)=>{
+            const textOptions = { value: newValue , color: "black" }
+            printValue(textValue, textOptions, requestAnimationFrame)
+        })
+
+    </script>
+</body>
+
+</html>

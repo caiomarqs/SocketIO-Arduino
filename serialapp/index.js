@@ -1,51 +1,52 @@
-'use strict'
-
-const SerialPort = require('serialport');
+const SerialPort = require('serialport')
 const Delimiter = require('@serialport/parser-delimiter')
+const EventEmitter = require('events')
+
+
 const port = new SerialPort('COM3', {
     baudRate: 9600
 })
 
 const parser = port.pipe(new Delimiter({ delimiter: '\n' }))
 
-class SerialAplication {
-    constructor(config = { log : false, ...options }) {
+class SerialApp extends EventEmitter {
+    constructor(config = { log: false, ...options }) {
+        super();
+        this.config = config;
+    }
 
-        this.port = port
-        this.parser = parser
-        this.config = config
-    
-        this.log = config.log
-        if(config.log == true){
-            console.log("Logging data from Serial... \n")
-        }
-        else{
-            console.log("No logs data from Serial... \n")
-        }
-      
+    start() {
+
+        let _this = this
+        let config = this.config
+        const dataObj = { value: "" }
+
+        //open serial connection
         port.on('open', (err) => {
             if (err) {
                 return console.error("Serial Connection -> DON'T WORK: \n" + err.message)
             }
             console.log("Serial Connection -> OK!")
         })
-  
-    }
 
-    getData(){
-        let dataValue
+
+        if (config.log == true) {
+            console.log("Logging data from Serial... \n")
+        }
+        else {
+            console.log("No logs data from Serial... \n")
+        }
+
         parser.on('data', (data) => {
-            dataValue = data.toString('utf8')    
-            if (this.log == true) {
-                console.log(dataValue)
+            dataObj.value = data.toString('utf8')
+
+            if (config.log == true) {
+                console.log(dataObj.value)
             }
-        }) 
-        return dataValue 
+            _this.emit('data-serial', dataObj.value)
+        })
+        
     }
 }
 
-
-module.exports = SerialAplication
-
-
-
+module.exports = SerialApp
