@@ -1,0 +1,15 @@
+{
+  "name": "node_serial_arduino",
+  "version": "1.0.0",
+  "description": "This project is an example of data interaction between arduino and node.",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd test && node index.js",
+    "start": ""
+  },
+  "author": "Caio Marques",
+  "license": "ISC",
+  "dependencies": {
+    "serialport": "^8.0.7"
+  }
+}
