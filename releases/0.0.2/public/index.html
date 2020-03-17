@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="./js/print-value.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <h3 id="textValue"></h3>
+    <br>
+    <input type="range" min="1" max="100" value="1" class="slider" id="rangeInput">
+    <p>Value: <span id="demo"></span></p>
+    <script type="module">
+
+        const socket = io('http://localhost:8080/')
+
+        const textValue = document.getElementById('textValue')
+
+        socket.on('connect', () => {
+            const playerId = socket.id
+            console.log(`Player connected on Client with id: ${playerId}`)
+        })
+
+        socket.on('new-value', (newValue) => {
+            const textOptions = { value: newValue, color: "black" }
+            printValue(textValue, textOptions, requestAnimationFrame)
+        })
+
+        
+        var slider = document.getElementById("rangeInput");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+        
+        slider.oninput = function () {
+            output.innerHTML = this.value
+            console.log(this.value);
+            socket.emit('slider-data', this.value)
+        }
+
+    </script>
+</body>
+
+</html>
