@@ -1,5 +1,5 @@
 function printValue(textValue, textOptions, requestAnimationFrame) {
-    textValue.innerText = `Value: [ ${textOptions.value} ]`
+    textValue.innerText = `[ ${textOptions.value} ]`
     textValue.style.color = textOptions.color
     
     requestAnimationFrame(() => {

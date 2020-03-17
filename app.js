@@ -11,7 +11,7 @@ const io = socketio(server)
 
 //Listening serial port
 const config = {
-    log: true,
+    log: false,
     port: 'COM3',
     baudRate: 9600,
     serialLog: false

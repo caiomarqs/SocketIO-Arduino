@@ -11,13 +11,13 @@
 </head>
 
 <body>
-    <h3 id="textValue"></h3>
+    <p>Potentiometer value: <span id="textValue"></span></p>
     <br>
     <input type="range" min="1" max="100" value="1" class="slider" id="rangeInput">
-    <p>Value: <span id="demo"></span></p>
+    <p>Led value: <span id="demo"></span></p>
     <script type="module">
 
-        const socket = io('http://localhost:8080/')
+        const socket = io()
 
         const textValue = document.getElementById('textValue')
 
