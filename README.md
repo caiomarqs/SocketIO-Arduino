@@ -7,7 +7,7 @@ This project is an example of interaction between an Arduino through the serial 
 <br>
 <p align="center">
   <a>
-    <img src="./ArduinoProgram/video_example.gif" width="400">
+    <img src="https://i.imgur.com/akS7m6F.gif" width="400">
   </a>
 </p>
 
