@@ -2,9 +2,9 @@
 const express = require('express')
 const http = require('http')
 const socketio = require('socket.io')
-const SerialArduinoApp = require('./serial-arduino-app/index')
+const SerialArduinoApp = require('./serial-arduino-app')
 
-//Instancia do servidor
+//Instance server
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
@@ -18,12 +18,12 @@ const config = {
 }
 const serialApp = new SerialArduinoApp(config);
 
-app.use(express.static('public'))   //Exepress use public folder for static content
+app.use(express.static('public'))   //Express use public folder for static content
 
 let lastSliderValue
 serialApp.sendDataToSerial()    //Init for send data to serial port
 
-//Init the io, the socket can manipule data from a front-end
+//Init the io, the socket can manipule data from front-end
 io.sockets.on('connection', (socket) => {
     const userId = socket.id
     console.log(`User connected: ${userId}`)

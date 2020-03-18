@@ -6,15 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/print-value.js"></script>
+    <script src="./js/potentiometer.js"></script>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
+    <div id="potentiometer"></div>
     <p>Potentiometer value: <span id="textValue"></span></p>
     <br>
-    <input type="range" min="1" max="100" value="1" class="slider" id="rangeInput">
+    <input type="range" min="0" max="100" value="0" class="slider" id="rangeInput">
     <p>Led value: <span id="demo"></span></p>
+
+    <label class="switch">
+        <input type="checkbox" id="toggle-button">
+        <span class="slider-toggle round"></span>
+    </label>
+
     <script type="module">
 
         const socket = io()
@@ -28,19 +35,30 @@
 
         socket.on('new-value', (newValue) => {
             const textOptions = { value: newValue, color: "black" }
-            printValue(textValue, textOptions, requestAnimationFrame)
+            potentiometerAnimation(textValue, textOptions, requestAnimationFrame)
         })
 
-        
+
         var slider = document.getElementById("rangeInput");
         var output = document.getElementById("demo");
         output.innerHTML = slider.value;
-        
+
         slider.oninput = function () {
             output.innerHTML = this.value
-            console.log(this.value);
             socket.emit('slider-data', this.value)
         }
+
+        let toggleButton = document.getElementById('toggle-button')
+
+        toggleButton.addEventListener('click', () => {
+            if (toggleButton.checked == true) {
+                output.innerHTML = 100
+                socket.emit('slider-data', 100)
+            } else {
+                output.innerHTML = 0
+                socket.emit('slider-data', 0)
+            }
+        })
 
     </script>
 </body>

@@ -21,7 +21,7 @@ void loop(){
     }
     if (inChar == '\n') {
       int sliderValue = inString.toInt();
-      int ledValue = map(sliderValue, 1, 100, 0, 255);
+      int ledValue = map(sliderValue, 0, 100, 0, 255);
       if(ledValue >= 240){
         ledValue = 240;
       }
