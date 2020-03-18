@@ -28,7 +28,7 @@ Este projeto é um exemplo de interação entre um Arduino pela porta serial e o
 Esse projeto é um modelo inicial, veja a documentção do [Socket.io](https://socket.io/docs/).
 
 - Configurar _Express_ e _Socket io_:
-```
+```js
   const express = require('express')
   const http = require('http')
   const socketio = require('socket.io')
@@ -46,7 +46,7 @@ Esse projeto é um modelo inicial, veja a documentção do [Socket.io](https://s
 ```
 
 - Configurar o _Socket io_ no lado do client:
-```
+```html
   <script>
     const socket = io()
 
@@ -58,7 +58,7 @@ Esse projeto é um modelo inicial, veja a documentção do [Socket.io](https://s
 ```
 
 - Configurar porta _Serial/USB_ e iniciar o Serial App:
-```
+```js
   const SerialArduinoApp = require('./serial-arduino-app')
     
   const config = {
@@ -75,7 +75,7 @@ Esse projeto é um modelo inicial, veja a documentção do [Socket.io](https://s
 
 #### **Enviado dados do client para o Arduino:**
 - Lado do server:
-```
+```js
   let lastSliderValue
   serialApp.sendDataToSerial()    //Init for send data to serial port
 
@@ -98,7 +98,7 @@ Esse projeto é um modelo inicial, veja a documentção do [Socket.io](https://s
   })
 ```
 - Lado do client:
-```
+```html
 <input type="range" min="0" max="100" value="0" class="slider" id="rangeInput">
 
 <script>
@@ -113,7 +113,7 @@ Esse projeto é um modelo inicial, veja a documentção do [Socket.io](https://s
 #### **Enviando dados do Arduino para o client:**
 - Lado do server:
 
-```
+```js
   let lastSerialData
   serialApp.reciveDataToSerial() // Init to recive data from serialport
 
@@ -131,7 +131,7 @@ Esse projeto é um modelo inicial, veja a documentção do [Socket.io](https://s
 ```
 
 - Lado do client:
-```
+```html
   <script>
     socket.on('new-value', (newValue) => {
         const textOptions = { value: newValue, color: "black" }
