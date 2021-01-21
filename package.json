@@ -13,6 +13,6 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "serialport": "^8.0.7",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   }
 }
